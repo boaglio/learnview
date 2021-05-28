@@ -1,0 +1,40 @@
+{
+
+    "id" : "1z0-819-001",
+    "category" : "Java",
+    "subcategory" : "IO",
+    "exam" : "1z0-819",
+    "tags" : [ 
+        "io", 
+        "easy"
+    ],
+    "text" : "What will the following code fragment print?",
+    "code" : "Path p1 = Paths.get(\"c:\\personal\\.\\photos\\..\\readme.txt\"); Path p2 = p1.normalize();         System.out.println(p2);",
+    "options" : [ 
+        {
+            "option" : "readme.txt",
+            "answer" : "",
+            "correct" : false
+        }, 
+        {
+            "option" : "c:personalphotos\readme.txt",
+            "answer" : "",
+            "correct" : false
+        }, 
+        {
+            "option" : "c:personal\readme.txt",
+            "answer" : "Notice that . is always redundant and is removed by itself, while .. and the preceding directory cancel each other out because .. means parent directory. For example, a/b/.. is same as a.",
+            "correct" : true
+        }, 
+        {
+            "option" : "c:photos\readme.txt",
+            "answer" : "",
+            "correct" : false
+        }
+    ],
+    "explanation" : "The following is the complete JavaDoc API description of this method: public Path normalize() Returns a path that is this path with redundant name elements eliminated. The precise definition of this method is implementation dependent but in general it derives from this path, a path that does not contain redundant name elements. ",
+    "source" : {
+        "description" : "Enthuware Test",
+        "link" : "https://enthuware.com"
+    }
+}

@@ -1,0 +1,50 @@
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: learnview 
+  thymeleaf: 
+    cache: false
+
+load:
+  path: ./load
+        
+server:
+  port: 9000
+
+info:
+  app:
+   name: LearnView
+   version: ${pom.version}
+   java:
+    version: ${java.version}
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    com:
+      learnview: DEBUG
+
+management:
+  health:
+    db:
+      enabled: true
+    defaults:
+      enabled: true
+    diskspace:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - mappings
