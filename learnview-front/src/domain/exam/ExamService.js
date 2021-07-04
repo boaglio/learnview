@@ -6,7 +6,8 @@ export default class ExamService {
 
     list() {
          
-        console.log("chamou LIST!");
+      //  console.log("chamou LIST!");
+        
         return this._http
             .get('http://localhost:9000/api/exams')
             .then(
@@ -16,6 +17,7 @@ export default class ExamService {
                     throw new Error('Unable to get exams list');
                 }
             )
+            
     }
 
 }

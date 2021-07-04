@@ -10,15 +10,16 @@ import msg from './pt_BR';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import './assets/css/teste.css';
-import './assets/js/teste.js';
+import './assets/css/main.css';
+import './assets/js/main.js';
 
 
 
 Vue.use(VueResource);
 
 Vue.http.options.root = 'http://localhost:9000';
-Vue.use(VueRouter);
+
+Vue.use(VueRouter); 
 
 // Vue.http.options.root = process.env.API_URL ? process.env.API_URL : 'http://localhost:9000';
 

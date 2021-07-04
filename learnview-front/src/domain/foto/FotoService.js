@@ -1,5 +1,3 @@
-// alurapic/src/domain/foto/FotoService.js
-
 export default class FotoService {
 
     constructor(resource) {

@@ -20,4 +20,6 @@ public interface QuestionRepository extends MongoRepository<Question, String> {
     // get questions for exam
     List<Question> findByExam(String exam);
 
+    Question findTopByOrderByIdDesc();
+
 }

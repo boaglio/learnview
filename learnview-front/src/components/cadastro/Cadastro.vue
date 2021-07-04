@@ -1,5 +1,3 @@
-<!-- alurapic/src/components/cadastro/Cadastro.vue -->
-
 <template>
 
   <div>

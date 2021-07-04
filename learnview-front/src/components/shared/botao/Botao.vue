@@ -31,7 +31,7 @@ export default {
    methods: {
 
        disparaAcao() {
-           console.log(typeof(this.confirmacao));
+         //  console.log(typeof(this.confirmacao));
            if(this.confirmacao) {
                if(confirm('Confirma operacao?')) {
                     this.$emit('botaoAtivado');
@@ -46,7 +46,7 @@ export default {
 
        estiloDoBotao() {
 
-           console.log(typeof(this.estilo));
+        //   console.log(typeof(this.estilo));
 
            // se o valor é padrão ou não passou nada para estilo
            if(this.estilo == 'padrao' || !this.estilo ) return 'botao botao-padrao';

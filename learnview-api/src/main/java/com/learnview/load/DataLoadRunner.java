@@ -41,7 +41,20 @@ public class DataLoadRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         try {
+
             LocalDateTime start = LocalDateTime.now();
+            log.info("====  Database Check ==== ");
+            long qtQuestions = 0;
+            try {
+                qtQuestions = questionRepository.count();
+                log.info("=  Stored Questions: [" + qtQuestions + "]  =");
+            } catch (Exception e) {
+                log.info("================================================");
+                log.info("====  Database Check Error: " + e.getMessage());
+                log.info("====  Is your MongoDB up ??? ====");
+                System.exit(0);
+            }
+
             log.info("==== DataLoadRunner started [" + loadPath + "] ====");
 
             List<String> exams = Stream.of(new File(loadPath).listFiles()).filter(file -> file.isDirectory())

@@ -1,19 +1,14 @@
 <template>
     <div>    
         <h1 class="centralizado">Learn View</h1>
- 
-        <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="search">
+  
         <ul class="lista-exams">
           <li class="lista-exams-item" v-for="exam of examsComFiltro">
               <meu-painel :titulo="exam.category">
                 <img :src="'static/'+ exam.name+'.png'" /> 
-
-                <router-link :to="{ name: 'altera', params: { id : exam._id }}">
-                  <meu-botao 
-                    rotulo="Take test" 
-                    tipo="button"/>
+                <router-link :to="{ path: '/test/new', params: { exam : exam.name }}">
+                  <button class="btn btn-primary">Take test</button>
                 </router-link>  
-                
               </meu-painel>
           </li>
         </ul>
@@ -25,7 +20,6 @@
 import Painel from '../shared/painel/Painel.vue';
 import Botao from '../shared/botao/Botao.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
-import BotaoVue from '../shared/botao/Botao.vue';
 import ExamService from '../../domain/exam/ExamService';
 
 export default {
@@ -88,6 +82,6 @@ export default {
 
   .filtro {
     display: block;
-    width: 100%;
+    width: 40%;
   }
 </style>

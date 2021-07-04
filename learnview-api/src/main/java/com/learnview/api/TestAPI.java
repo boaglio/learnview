@@ -2,12 +2,9 @@ package com.learnview.api;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learnview.LearnViewApplication;
 import com.learnview.domain.Question;
 import com.learnview.domain.Test;
 import com.learnview.dto.Answer;
-import com.learnview.dto.Exam;
 import com.learnview.dto.NewTestRequest;
 import com.learnview.dto.RunningTest;
 import com.learnview.repo.QuestionRepository;
@@ -27,12 +24,11 @@ import com.learnview.repo.TestRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:8080")
-public class LearnViewAPI {
+@CrossOrigin(origins = LearnViewApplication.HTTP_ORIGINS)
+public class TestAPI {
 
     @Autowired
-    public LearnViewAPI(QuestionRepository questionRepository, TestRepository testRepository,
-            ObjectMapper objectMapper) {
+    public TestAPI(QuestionRepository questionRepository, TestRepository testRepository, ObjectMapper objectMapper) {
         this.questionRepository = questionRepository;
         this.testRepository = testRepository;
         this.objectMapper = objectMapper;
@@ -41,45 +37,6 @@ public class LearnViewAPI {
     private QuestionRepository questionRepository;
     private TestRepository     testRepository;
     private ObjectMapper       objectMapper;
-
-    @GetMapping("/question/")
-    public long count() {
-        return questionRepository.count();
-    }
-
-    @GetMapping("/question/exam/{exam}")
-    public long countByExam(@PathVariable String exam) {
-        return questionRepository.countByExam(exam);
-    }
-
-    @GetMapping("/question/category/{category}")
-    public long countByCategory(@PathVariable String category) {
-        return questionRepository.countByCategory(category);
-    }
-
-    @GetMapping("/question/category/{category}/subcategory/{subcategory}/")
-    public long countByCategoryAndSubcategory(@PathVariable String category, @PathVariable String subcategory) {
-        return questionRepository.countByCategoryAndSubcategory(category, subcategory);
-    }
-
-    @GetMapping("/question/{id}")
-    public Question findById(@PathVariable String id) {
-        Optional<Question> question = questionRepository.findById(id);
-        if (question.isEmpty())
-            return new Question();
-        return question.get();
-    }
-
-    @GetMapping("/questions/exam/{exam}")
-    public List<Question> findByExam(@PathVariable String exam) {
-        return questionRepository.findByExam(exam);
-    }
-
-    @GetMapping("/exams")
-    public List<Exam> findExams() {
-        List<Question> allQuestions = questionRepository.findAll();
-        return allQuestions.stream().map(q -> new Exam(q.getExam(), q.getCategory())).collect(Collectors.toList());
-    }
 
     @PostMapping("/test")
     @ResponseBody
