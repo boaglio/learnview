@@ -10,8 +10,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
+@ToString
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(Include.NON_NULL)
 @Document("questions")

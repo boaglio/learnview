@@ -6,7 +6,7 @@
           <li class="lista-exams-item" v-for="exam of examsComFiltro">
               <meu-painel :titulo="exam.category">
                 <img :src="'static/'+ exam.name+'.png'" /> 
-                <router-link :to="{ path: '/test/new', params: { exam : exam.name }}">
+                <router-link :to="{ name: 'new_test', params: { exam : exam.name , user: user }}">
                   <button class="btn btn-primary">Take test</button>
                 </router-link>  
               </meu-painel>
@@ -17,21 +17,18 @@
 
 <script>
 
-import Painel from '../shared/painel/Painel.vue';
-import Botao from '../shared/botao/Botao.vue';
-import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
+import Painel from '../shared/painel/Painel.vue';  
 import ExamService from '../../domain/exam/ExamService';
 
 export default {
 
   components: {
-    'meu-painel': Painel,
-    'imagem-responsiva': ImagemResponsiva,
-    'meu-botao': Botao
+    'meu-painel': Painel 
   },
 
   data () {
     return {
+      user: "Anonymous User",
       exams: [],
       filtro: ''
     }
@@ -51,6 +48,9 @@ export default {
 
   methods: {
  
+     takeTest(exam) {
+       alert("teste :" +exam.name);
+     }
   },
   
   created() {

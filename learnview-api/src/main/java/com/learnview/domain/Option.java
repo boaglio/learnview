@@ -2,17 +2,23 @@ package com.learnview.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.learnview.dto.OptionAnswer;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
+@ToString
 @JsonInclude(Include.NON_NULL)
-public class Option extends OptionAnswer {
+public class Option {
 
-    private String  answer;
-    private boolean correct;
+    private String  option;
+    private Boolean selected;
+
+    @EqualsAndHashCode.Exclude
+    private Boolean correct;
+
+    @EqualsAndHashCode.Exclude
+    private String answer;
 
 }

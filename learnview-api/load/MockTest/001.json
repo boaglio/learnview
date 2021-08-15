@@ -1,0 +1,30 @@
+{
+
+    "id" : "MockTest-001",
+    "category" : "MockTest",
+    "subcategory" : "subcategory",
+    "exam" : "MockTest",
+    "tags" : [ 
+        "mock", 
+        "test"
+    ],
+    "text" : "This is a mock test 1?",
+    "code" : "no code",
+    "options" : [ 
+        {
+            "option" : "Yes",
+            "answer" : "Sure it is",
+            "correct" : true
+        }, 
+        {
+            "option" : "No",
+            "answer" : "",
+            "correct" : false
+        }
+    ],
+    "explanation" : "This is mock answer, my friend!",
+    "source" : {
+        "description" : "My mock test",
+        "link" : "https://boaglio.com"
+    }
+}

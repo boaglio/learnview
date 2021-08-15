@@ -70,9 +70,10 @@ public class DataLoadRunner implements ApplicationRunner {
                 // load question to exam db
                 int count = 1;
                 for (String q : questions) {
-                    log.info("Saving " + count + "/" + questions.size());
+                    log.info("[" + examToLoad + "] - saving " + count + "/" + questions.size());
                     String fileStr = FileUtil.convertFile2String(questionDir + File.separator + q);
                     saveQuestion(fileStr);
+                    count++;
                 }
             }
 
@@ -81,6 +82,7 @@ public class DataLoadRunner implements ApplicationRunner {
                     TimeUnit.MILLISECONDS.toMinutes(Duration.between(start, end).toMillis()),
                     TimeUnit.MILLISECONDS.toSeconds(Duration.between(start, end).toMillis()) - TimeUnit.MINUTES
                             .toSeconds(TimeUnit.MILLISECONDS.toMinutes(Duration.between(start, end).toMillis()))));
+
         } catch (Exception e) {
             log.info("==== DataLoadRunner error: " + e.getMessage());
         }
@@ -90,7 +92,17 @@ public class DataLoadRunner implements ApplicationRunner {
         Question q = new Question();
         try {
             q = objectMapper.readValue(strQuestion, Question.class);
+
+            // all correct answers should be selected
+            q.getOptions().forEach(opt -> {
+                if (opt.getCorrect())
+                    opt.setSelected(true);
+                else
+                    opt.setSelected(false);
+            });
+
             questionRepository.save(q);
+
         } catch (JsonProcessingException e) {
             log.info("parse error: " + e.getMessage());
         }
