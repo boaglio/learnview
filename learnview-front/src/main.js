@@ -13,14 +13,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/main.css';
 import './assets/js/main.js';
 
-
-
 Vue.use(VueResource);
-
-Vue.http.options.root = 'http://localhost:9000';
 
 Vue.use(VueRouter); 
 
+Vue.prototype.$API_URL = process.env.API_URL ?  'http://localhost:9000': 'http://localhost:9000'
+
+
+// Vue.http.options.root = 'http://api:9000';
 // Vue.http.options.root = process.env.API_URL ? process.env.API_URL : 'http://localhost:9000';
 
 /*

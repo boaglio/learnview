@@ -58,14 +58,18 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
+API_URL: 'http://localhost:9000';
+
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+
+  console.log("production!")
+
+  module.exports.devtool = '#source-map' 
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
-        API_URL: '"http://boaglio.com"'
+        API_URL: '"http://api:9000"'        
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -77,5 +81,10 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ])   
+
+} else {
+ 
+  console.log("NOT production!")
+
 }

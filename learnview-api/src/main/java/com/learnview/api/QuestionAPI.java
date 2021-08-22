@@ -25,7 +25,7 @@ import lombok.extern.java.Log;
 @Log
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = LearnViewApplication.HTTP_ORIGINS)
+@CrossOrigin(origins = { LearnViewApplication.HTTP_ORIGINS1, LearnViewApplication.HTTP_ORIGINS2 })
 public class QuestionAPI {
 
     private ObjectMapper objectMapper;

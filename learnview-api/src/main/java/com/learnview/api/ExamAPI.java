@@ -16,7 +16,7 @@ import com.learnview.repo.QuestionRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = LearnViewApplication.HTTP_ORIGINS)
+@CrossOrigin(origins = { LearnViewApplication.HTTP_ORIGINS1, LearnViewApplication.HTTP_ORIGINS2 })
 public class ExamAPI {
 
     @Autowired

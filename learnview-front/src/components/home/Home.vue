@@ -54,7 +54,9 @@ export default {
   },
   
   created() {
-    this.service = new ExamService(this.$http);
+    console.log('API_URL   =   '+this.$API_URL)
+
+    this.service = new ExamService(this.$http,this.$API_URL);
 
     this.service.list()
       .then(exams => this.exams = exams, err => this.mensagem = err.message);

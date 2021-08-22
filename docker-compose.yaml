@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    container_name: mongodb-learnview
+    network_mode: host
+    image: mongo:latest
+    environment:
+       MONGO_INITDB_DATABASE: learnview
+    volumes:
+      - ./mongodb-data:/data/db 
+
+  api:
+    container_name: springboot-learnview
+    network_mode: host
+    build: ./learnview-api
+    volumes:
+      - ./learnview-api/load:/usr/local/lib/load  
+    depends_on:
+      - db       
+  
+  front:
+    container_name: vue-learnview
+    network_mode: host
+    build: ./learnview-front 
+    depends_on:
+      - api 
+  
