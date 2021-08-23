@@ -8,7 +8,7 @@ Learn View is more about learning than getting certified
 Fire up app: 
 
 ```
-$ git clone 
+$ git clone https://github.com/boaglio/learnview/
 $ cd learnview
 $ docker-compose build
 $ docker-compose up 
