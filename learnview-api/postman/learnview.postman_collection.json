@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "91cd0e62-0f60-4498-9426-3ed253a1b72f",
+		"name": "learnview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Mock test 1",
+			"item": [
+				{
+					"name": "new test Mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.collectionVariables.set(\"testID\", jsonData.test.id);",
+									"pm.collectionVariables.set(\"questionID1\", jsonData.question.id);  ",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									" ",
+									"pm.test(\"test ID is not null\", () => { ",
+									"  pm.expect(jsonData.test.id).to.be.a(\"string\");",
+									"  pm.expect(jsonData.test.id).to.be.not.null;",
+									"});",
+									" ",
+									"pm.test(\"question ID1 is not null\", () => { ",
+									"  pm.expect(jsonData.question.id).to.be.a(\"string\");",
+									"  pm.expect(jsonData.question.id).to.be.not.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"exam\": \"MockTest\",\n    \"username\": \"fb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "next question 1 mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									" ",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"pm.collectionVariables.set(\"questionID2\", jsonData.question.id);  ",
+									" ",
+									"pm.test(\"question ID2 is not null\", () => { ",
+									"  pm.expect(jsonData.question.id).to.be.a(\"string\");",
+									"  pm.expect(jsonData.question.id).to.be.not.null;",
+									"});",
+									" ",
+									"pm.test(\"position 1\", () => { ",
+									"  pm.expect(jsonData.test.position).to.be.a(\"number\");",
+									"  pm.expect(jsonData.test.position).to.eql(1);",
+									"});",
+									"  ",
+									"pm.test(\"completed ? \", () => { ",
+									"  pm.expect(jsonData.test.completed).to.be.a(\"boolean\");",
+									"  pm.expect(jsonData.test.completed).to.eql(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testID\": \"{{testID}}\",\n    \"questionID\": \"{{questionID1}}\",\n    \"position\": 1,\n    \"options\": [\n        {\n            \"option\": \"Yes\",\n            \"selected\": true\n        },\n        {\n            \"option\": \"No\",\n            \"selected\": false\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/next-question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								"next-question",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "next question 2 mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.collectionVariables.set(\"questionID3\", jsonData.question.id);  ",
+									"",
+									"pm.test(\"completed ? \", () => { ",
+									"  pm.expect(jsonData.test.completed).to.be.a(\"boolean\");",
+									"  pm.expect(jsonData.test.completed).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"3 total\", () => { ",
+									"  pm.expect(jsonData.test.total).to.be.a(\"number\");",
+									"  pm.expect(jsonData.test.total).to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testID\": \"{{testID}}\",\n    \"questionID\": \"{{questionID2}}\",\n    \"position\": 2,\n    \"options\": [\n        {\n            \"option\": \"Yes\",\n            \"selected\": true\n        },\n        {\n            \"option\": \"No\",\n            \"selected\": false\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/next-question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								"next-question",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "next question 3 mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"  ",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"pm.test(\"position 2\", () => { ",
+									"  pm.expect(jsonData.test.position).to.be.a(\"number\");",
+									"  pm.expect(jsonData.test.position).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"3 total\", () => { ",
+									"  pm.expect(jsonData.test.total).to.be.a(\"number\");",
+									"  pm.expect(jsonData.test.total).to.eql(3);",
+									"});",
+									"",
+									"pm.test(\"completed ? \", () => { ",
+									"  pm.expect(jsonData.test.completed).to.be.a(\"boolean\");",
+									"  pm.expect(jsonData.test.completed).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testID\": \"{{testID}}\",\n    \"questionID\": \"{{questionID3}}\",\n    \"position\": 3,\n    \"options\": [\n        {\n            \"option\": \"Yes\",\n            \"selected\": true\n        },\n        {\n            \"option\": \"No\",\n            \"selected\": false\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/next-question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								"next-question",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Mock test 2",
+			"item": [
+				{
+					"name": "new test Mock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"exam\": \"MockTest\",\n    \"username\": \"fb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "next question 1 mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"testID\", jsonData.test.id);",
+									"pm.environment.set(\"questionID2\", jsonData.question.id); ",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testID\": \"61038466b58a8728b812e183\",\n    \"questionID\": \"MockTest-001\",\n    \"position\": 1,\n    \"options\": [\n        {\n            \"option\": \"Yes\",\n            \"selected\": true\n        },\n        {\n            \"option\": \"No\",\n            \"selected\": false\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/next-question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								"next-question",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "next question 2 mock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"testID\", jsonData.test.id);",
+									"pm.environment.set(\"questionID2\", jsonData.question.id); ",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testID\": \"61038466b58a8728b812e183\",\n    \"questionID\": \"MockTest-002\",\n    \"position\": 2,\n    \"options\": [\n        {\n            \"option\": \"Yes\",\n            \"selected\": true\n        },\n        {\n            \"option\": \"No\",\n            \"selected\": false\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/test/next-question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"test",
+								"next-question",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "new test Java",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"pm.environment.set(\"questionID\", jsonData.question.id);",
+							"pm.environment.set(\"username\", jsonData.question.username);",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"exam\": \"1Z0-819\",\n    \"username\": \"fb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/test/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"test",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List exams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/exams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"exams"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "testID",
+			"value": ""
+		},
+		{
+			"key": "questionID1",
+			"value": ""
+		},
+		{
+			"key": "questionID2",
+			"value": ""
+		},
+		{
+			"key": "questionID3",
+			"value": ""
+		}
+	]
+}
