@@ -337,7 +337,7 @@ public class TestClass //2 \n\
 
   created() {
 
-    this.service = new questionService(this.$http);
+    this.service = new questionService(this.$http,this.$API_URL);
 
   }
 

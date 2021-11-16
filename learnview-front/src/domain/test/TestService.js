@@ -1,19 +1,18 @@
 export default class TestService {
-
-    constructor(http) { 
+ 
+    constructor(http,api_url) { 
         this._http = http;
+        this._api_url = api_url;
     }
  
-    newTest(test) {
-         
-        const testStr = JSON.stringify(test);
-
+    list() {
+   
         return this._http
-            .post('http://localhost:9000/api/test/',testStr)
+            .get(this._api_url + '/api/tests')  
             .then(res => res.json(),
                   err => {
                     console.log(err);
-                    throw new Error('Unable to submit test');
+                    throw new Error('Unable to get tests');
                 }
             )
             

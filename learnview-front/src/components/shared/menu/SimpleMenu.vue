@@ -1,12 +1,11 @@
- 
 <template>
-
+ 
 <div class="container">
   <nav class="navbar navbar-dark bg-dark ">
    <ul class="nav nav-pills">     
-    <li class="nav-item" v-for="rota in rotas">
+    <li class="nav-item" v-for="route in routes">
       <button class="btn btn-outline-success me-4" type="button">
-       <router-link :to="rota.path ? rota.path : '/'">{{rota.titulo}}</router-link>
+       <router-link :to="route.path ? route.path : '/'">{{route.titulo}}</router-link>
       </button>
     </li>   
    </ul>
@@ -15,14 +14,20 @@
 </template>
 
 <script>
+
 export default {
 
     props: {
-        rotas: {
+        routes: {
             type: Array, 
             required: true
         }
-    }
+    },
+  created() {
+ 
+      console.log('qt routes = '+ this.routes.length);
+ 
+  } 
 }
 </script>    
 

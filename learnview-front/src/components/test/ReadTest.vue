@@ -3,7 +3,7 @@
     <head>
      <title>{{ exam }} - {{ user }}</title> 
     </head>
-    <h1 class="c">New Test {{ exam }} - {{ user }} </h1>  
+    <h1 class="c">Test {{ exam }} - {{ user }} </h1>  
   </div>
 </template>
 
@@ -16,8 +16,8 @@ import TestService from '../../domain/test/TestService';
 export default {
  
   created() {
-    console.log('exam=['+this.exam+'] user=['+this.user+']');    
-    console.log('Loading exam...');
+    console.log('exam=['+this.exam+'] user=['+this.user+']');
+    console.log('Loading test...');
     this.test = new test(this.exam,this.user);
     this.service = new TestService(this.$http);
   //  this.question = this.service.newTest(this.test);
@@ -28,6 +28,7 @@ export default {
      return {        
            exam: this.$route.params.exam,
            user: this.$route.params.user,
+           id: this.$route.params.id,
            question:new question()
      }
    },

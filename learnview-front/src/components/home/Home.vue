@@ -1,15 +1,29 @@
 <template>
     <div>    
-        <h1 class="centralizado">Learn View</h1>
-  
-        <ul class="lista-exams">
-          <li class="lista-exams-item" v-for="exam of examsComFiltro">
-              <meu-painel :titulo="exam.category">
+        <h1 class="center">Learn View</h1>  
+        <h2 class="center">new tests</h2>  
+        <ul class="list">
+          <li class="list-item" v-for="exam of this.exams">
+              <simple-panel :titulo="exam.category">
                 <img :src="'static/'+ exam.name+'.png'" /> 
                 <router-link :to="{ name: 'new_test', params: { exam : exam.name , user: user }}">
                   <button class="btn btn-primary">Take test</button>
                 </router-link>  
-              </meu-painel>
+              </simple-panel>
+          </li>
+        </ul>
+        <h2 class="center">old tests</h2> 
+        <ul class="list">
+          <li class="list-item" v-for="test of this.tests">
+              <simple-panel :titulo="test.exam">
+                <img src="static/complete.png" v-if="test.completed" /> 
+                <img src="static/in-progress.png" v-else />
+                {{ test.exam }} - {{ test.when }}
+                [{{ test.correct }}/{{ test.total }}]
+                <router-link :to="{ name: 'old_test', params: { exam : test.name , user: user, id: test.id }}">
+                  <button class="btn btn-primary">Show test</button>
+                </router-link>                 
+              </simple-panel>
           </li>
         </ul>
     </div>
@@ -17,73 +31,62 @@
 
 <script>
 
-import Painel from '../shared/painel/Painel.vue';  
+import SimplePanel from '../shared/panel/SimplePanel.vue';  
 import ExamService from '../../domain/exam/ExamService';
+import TestService from '../../domain/test/TestService';
 
 export default {
 
   components: {
-    'meu-painel': Painel 
+    'simple-panel': SimplePanel 
   },
 
   data () {
     return {
       user: "Anonymous User",
       exams: [],
-      filtro: ''
+      tests: [] 
     }
   },
 
-  computed: {  
+  computed: {   
 
-    examsComFiltro() {    
-      if (this.filtro) {
-        let exp = new RegExp(this.filtro.trim(), 'i');
-        return this.exams.filter(exam => exp.test(exam.name));
-      } else {
-        return this.exams;
-      }
-    }
   },
 
-  methods: {
- 
-     takeTest(exam) {
-       alert("teste :" +exam.name);
-     }
+  methods: { 
+
   },
   
   created() {
-    console.log('API_URL   =   '+this.$API_URL)
 
-    this.service = new ExamService(this.$http,this.$API_URL);
+    console.log('[API_URL] = '+this.$API_URL)
+ 
+    this.examService = new ExamService(this.$http,this.$API_URL);
+    this.testService = new TestService(this.$http,this.$API_URL);
 
-    this.service.list()
+    this.examService.list()
       .then(exams => this.exams = exams, err => this.mensagem = err.message);
+
+    this.testService.list()
+      .then(tests => this.tests = tests, err => this.mensagem = err.message);      
   }
 
 }
 </script>
 <style>
-
   img {
       width: 100%;
   }
 
-  .centralizado {
+  .center {
     text-align: center;
   }
 
-  .lista-exams {
+  .list {
     list-style: none;
   }
 
-  .lista-exams .lista-exams-item {
+  .list .list-item {
     display: inline-block;
-  }
-
-  .filtro {
-    display: block;
-    width: 40%;
   }
 </style>

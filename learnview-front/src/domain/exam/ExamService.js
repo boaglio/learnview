@@ -6,9 +6,10 @@ export default class ExamService {
     }
 
     list() { 
-      console.log("NODE_ENV="+process.env.NODE_ENV);
 
-      console.log(this.api_url + '/api/exams')
+      console.log("api_url="+this._api_url);
+
+      console.log(this._api_url + '/api/exams')
 
         return this._http
             .get(this._api_url + '/api/exams')
