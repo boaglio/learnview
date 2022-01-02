@@ -49,6 +49,7 @@ When the API is up, the first job is to load all questions from  "*\learnview-ap
 
 And then you are free to navigate and take your test.  
 
+API Doc is here: http://localhost:9000/swagger-ui/index.html
 
 ## Suggested tools
 

@@ -1,6 +1,10 @@
 server:
   port: 9000
-   
+
+springdoc:
+  api-docs:
+    path: /api-docs
+       
 info:
   app:
    name: LearnView
