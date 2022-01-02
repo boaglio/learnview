@@ -1,9 +1,9 @@
 <template>
  
 <div class="container">
-  <nav class="navbar navbar-dark bg-dark ">
+  <nav class="navbar ">
    <ul class="nav nav-pills">     
-    <li class="nav-item" v-for="route in routes">
+    <li class="nav-item" v-for="route in routes" :key="route.id" >
       <button class="btn btn-outline-success me-4" type="button">
        <router-link :to="route.path ? route.path : '/'">{{route.titulo}}</router-link>
       </button>

@@ -9,9 +9,9 @@
 
 <script>
 
-import question from '../../domain/question/Question.js';
-import test from '../../domain/test/Test.js';
-import TestService from '../../domain/test/TestService';
+import question from '../domain/question/Question.js';
+import test from '../domain/test/Test.js';
+import TestService from '../domain/test/TestService';
 
 export default {
  

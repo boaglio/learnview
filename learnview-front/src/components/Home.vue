@@ -3,9 +3,9 @@
         <h1 class="center">Learn View</h1>  
         <h2 class="center">new tests</h2>  
         <ul class="list">
-          <li class="list-item" v-for="exam of this.exams">
+          <li class="list-item" v-for="exam of this.exams" :key="exam.id">
               <simple-panel :titulo="exam.category">
-                <img :src="'static/'+ exam.name+'.png'" /> 
+                <img :src="require(`@/assets/${exam.name}.png`)" /> 
                 <router-link :to="{ name: 'new_test', params: { exam : exam.name , user: user }}">
                   <button class="btn btn-primary">Take test</button>
                 </router-link>  
@@ -14,10 +14,10 @@
         </ul>
         <h2 class="center">old tests</h2> 
         <ul class="list">
-          <li class="list-item" v-for="test of this.tests">
+          <li class="list-item" v-for="test of this.tests" :key="test.id">
               <simple-panel :titulo="test.exam">
-                <img src="static/complete.png" v-if="test.completed" /> 
-                <img src="static/in-progress.png" v-else />
+                <img src="@/assets/complete.png" v-if="test.completed" /> 
+                <img src="@/assets/in-progress.png" v-else />
                 {{ test.exam }} - {{ test.when }}
                 [{{ test.correct }}/{{ test.total }}]
                 <router-link :to="{ name: 'old_test', params: { exam : test.name , user: user, id: test.id }}">
@@ -31,9 +31,9 @@
 
 <script>
 
-import SimplePanel from '../shared/panel/SimplePanel.vue';  
-import ExamService from '../../domain/exam/ExamService';
-import TestService from '../../domain/test/TestService';
+import SimplePanel from './shared/SimplePanel.vue';  
+import ExamService from '../domain/exam/ExamService';
+import TestService from '../domain/test/TestService';
 
 export default {
 
@@ -61,14 +61,17 @@ export default {
 
     console.log('[API_URL] = '+this.$API_URL)
  
-    this.examService = new ExamService(this.$http,this.$API_URL);
-    this.testService = new TestService(this.$http,this.$API_URL);
+    this.examService = new ExamService(this.$API_URL);
+    this.testService = new TestService(this.$API_URL);
 
     this.examService.list()
-      .then(exams => this.exams = exams, err => this.mensagem = err.message);
+      .then(exams => { this.exams = exams; console.log("exams: "+this.exams.length ) }, err => this.mensagem = err.message);
+
+    this.exams = this.examService.list();
 
     this.testService.list()
-      .then(tests => this.tests = tests, err => this.mensagem = err.message);      
+      .then(tests => { this.tests = tests;console.log("tests: "+ this.tests.length ) } , err => this.mensagem = err.message);      
+     
   }
 
 }

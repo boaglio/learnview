@@ -1,20 +1,19 @@
+import axios from "axios";
+
 export default class ExamService {
 
-    constructor(http,api_url) { 
-        this._http = http;
+    constructor(api_url) { 
         this._api_url = api_url;
     }
 
     list() { 
 
-      console.log("api_url="+this._api_url);
+      console.log("GET: "+this._api_url + '/api/exams')
 
-      console.log(this._api_url + '/api/exams')
-
-        return this._http
+        return axios
             .get(this._api_url + '/api/exams')
             .then(
-                res => res.json(),
+                res => res.data,
                 err => {
                     console.log(err);
                     throw new Error('Unable to get exams list');

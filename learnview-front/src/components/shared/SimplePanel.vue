@@ -2,11 +2,13 @@
 
     <div class="panel">
      <h2 class="panel-title" @dblclick="visible=!visible">{{ title }}</h2>
-     <transition name="panel-fade">
+     <router-view>     
+      <transition name="panel-fade">
        <div class="panel-inside" v-show="visible">
         <slot></slot>
        </div>
-     </transition>
+      </transition>
+     </router-view>
     </div>
  
 </template>

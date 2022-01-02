@@ -1,19 +1,20 @@
 <template>
-  <div class="appbody">
-    <simple-menu :routes="routes"/> 
-    <transition name="page">
-     <router-view></router-view>
-    </transition>
-  </div>
+  <simple-menu :routes="routes"/>  
+<router-view></router-view>
+
 </template>
 
-<script>
+<script> 
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { routes }  from './routes';
-import SimpleMenu from './components/shared/menu/SimpleMenu.vue'
+import SimpleMenu from './components/shared/SimpleMenu.vue'
 
 export default {
-  components: {
-    'simple-menu' : SimpleMenu
+  name: 'App',
+  components: { 
+   'simple-menu' : SimpleMenu
   },
   data() {
     return {
@@ -24,15 +25,12 @@ export default {
 </script>
 
 <style>
-  .appbody {
-    font-family: Helvetica, sans-serif;
-    margin: 0 auto;
-    width: 96%;
-  }
-  .page-enter, .painel-leave-active {
-    opacity: 0;
-  } 
-  .page-enter-active, .painel-leave-active {
-    transition: opacity .3s;
-  }   
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>

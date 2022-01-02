@@ -1,20 +1,19 @@
+import axios from "axios";
+
 export default class QuestionService {
 
-    constructor(http,api_url) { 
-        this._http = http;
+    constructor(api_url) { 
         this._api_url = api_url;
     }
  
     exportJSON(question) {
-         
-        const questionStr = JSON.stringify(question);
-        
-       // console.log("service JSON:"+questionStr);
-       console.log(this.api_url + '/api/question/new')
+          
+       // console.log("service JSON:"+question );
+       console.log("POST: "+ this._api_url + '/api/question/new')
 
-        return this._http
-            .post(this._api_url + '/api/question/new',questionStr)
-            .then(res => res.json(),
+        return  axios
+            .post(this._api_url + '/api/question/new',question)
+            .then(res => res.data,
                   err => {
                     console.log(err);
                     throw new Error('Unable to submit question');
